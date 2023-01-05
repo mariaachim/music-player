@@ -1,6 +1,4 @@
-const jsmediatags = window.jsmediatags;
-
-let canvas;
+let jsmediatags = window.jsmediatags;
 
 // interactive elements 
 let volSlider;
@@ -8,26 +6,26 @@ let playButton;
 let nextButton;
 let prevButton;
 
+// music data
 let img;
-let currentTrack;
-
-let track;
 let playlist;
 let queue = [];
-let images = [];
 let metadata = [];
+let timestamp;
 
+// positioning
 let gap;
 let ypad;
 
+// addImages variable
 let i = -1;
 
 function preload() {
-  img = loadImage("placeholder-album-art.jpg");
+  img = loadImage("assets/images/placeholder-album-art.jpg");
   soundFormats('mp3', 'ogg');
-  nature = loadSound("beat-of-nature.mp3");
-  summer = loadSound("summer-nights.mp3");
-  goodVibes = loadSound("good-vibes.mp3");
+  nature = loadSound("assets/music/beat-of-nature.mp3");
+  summer = loadSound("assets/music/summer-nights.mp3");
+  goodVibes = loadSound("assets/music/good-vibes.mp3");
 
   queue.push(nature);
   queue.push(summer);
@@ -48,20 +46,17 @@ function setup() {
   progressSlider = createSlider(0, 1, 0, 0.01);
   progressSlider.addClass("progress");
 
-  console.log(queue);
-
   addImages();
 
   playlist = new Playlist(queue);
 
-  canvas = createCanvas(windowWidth, windowHeight);
+  let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("myDiv");
   noLoop();
 }
 
 function draw() {
   let text = document.getElementById("data");
-  //text.style.right = windowWidth / 2 - 80 + "px";
   text.style.top = ypad + "px";
   image(img, windowWidth / 2 - 200, ypad + 70, 400, 400);
   progressSlider.position(windowWidth / 2 - 200, ypad + 500);
@@ -74,8 +69,6 @@ function draw() {
   volSlider.position(windowWidth / 2 - 64, ypad + 483 + gap);
   volSlider.input(adjustVolume);
 
-  // SET POSITIONS OF TEXT IN JS TO WORK IN MULTIPLE RESOLUTIONS
-
   sliderLoop();
 }
 
@@ -84,7 +77,6 @@ function playCurrentTrack() {
   adjustVolume();
   image(metadata[playlist.index].image, windowWidth / 2 - 200, ypad + 70, 400, 400);
   document.getElementById("data").innerText = metadata[playlist.index].title + " - " + metadata[playlist.index].artist;
-  console.log(metadata);
 }
 
 function goNext() {
@@ -106,7 +98,7 @@ function adjustVolume() {
 }
 
 function sliderLoop() {
-  let timestamp = playlist.getCurrentTrack.currentTime() / playlist.getCurrentTrack.duration();
+  timestamp = playlist.getCurrentTrack.currentTime() / playlist.getCurrentTrack.duration();
   progressSlider.value(timestamp);
   console.log("current time: " + playlist.getCurrentTrack.currentTime() + ", duration: " + playlist.getCurrentTrack.duration());
   setTimeout(sliderLoop, 500);
