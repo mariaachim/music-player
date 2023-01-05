@@ -6,8 +6,6 @@ A OOP music player made using JavaScript, HTML and CSS.
 
 ## Acknowledgements
 
-<br>
-
 Album art images from [Unsplash](https://unsplash.com/).
 Music from [Pixabay](https://pixabay.com/).
 
