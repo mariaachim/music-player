@@ -4,6 +4,10 @@
 
 A OOP music player made using JavaScript, HTML and CSS.
 
+Accessible on https://maria-html-project.404dcd.cc/music-player/
+<br>
+Hosting kindly provided by [404dcd](https://github.com/404dcd).
+
 ## Acknowledgements
 
 Album art images from [Unsplash](https://unsplash.com/).
